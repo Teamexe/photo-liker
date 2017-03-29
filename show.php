@@ -7,20 +7,10 @@
             
  if(isset($_GET['id']) && is_numeric($_GET['id'])) {
      //connect to the db
-          $dbhost = "localhost";
-        $dbuser = "root";
-        $dbpass = "mpsk22";
-        $dbname = "photo_liker";
-
-
-     $con = mysqli_connect("$dbhost","$dbuser","$dbpass","$dbname") or die("Some error occurred during connection " . mysqli_error($con));  
- 
-
-     // select our database
-     //mysql_select_db("$db") or die(mysql_error());
+    require "db_conn.php";
  
      // get the image from the db
-     $sql = "SELECT * FROM storeimages WHERE id=" .$_GET['id'] . ";";
+     $sql = "SELECT * FROM image WHERE id=" .$_GET['id'] . ";";
  
      // the result of the query
      $result = mysqli_query($con,$sql) or die("Invalid query: " . mysqli_error());
@@ -29,7 +19,7 @@
      //header("Content-type: image/jpeg");
 
      if($data=mysqli_fetch_assoc($result))
-     {    header("content-type: image/jpg");
+     {    header("content-type: image/*");
 
           echo "".$data['image']."";
           //echo "<img src='arch.jpg'>";
